@@ -4,6 +4,7 @@ add_action('wp_enqueue_scripts', 'style_theme');
 add_action('wp_enqueue_scripts', 'header_scripts');
 add_action('wp_footer', 'scripts_theme');
 add_action('after_setup_theme', 'theme_register_nav_menu');
+add_action('widgets_init', 'register_my_widgets');
 
 function style_theme() {
     wp_enqueue_style('style', get_stylesheet_uri());
@@ -28,4 +29,26 @@ function header_scripts() {
 function theme_register_nav_menu() {
 	register_nav_menu( 'top', 'Header menu' );
 	register_nav_menu( 'bottom', 'Footer menu' );
+}
+
+function register_my_widgets(){
+	register_sidebar( array(
+		'name'          => 'Left Sidebar',
+		'id'            => "left_sidebar",
+		'description'   => 'Custom sidebar',
+		'before_widget' => '<div class="widget %2$s">',
+		'after_widget'  => "</div>\n",
+		'before_title'  => '<h5 class="widgettitle">',
+		'after_title'   => "</h5>\n"
+    ) );
+    
+    register_sidebar( array(
+		'name'          => 'Top Sidebar',
+		'id'            => "top_sidebar",
+		'description'   => 'Additional custom sidebar',
+		'before_widget' => '<div class="widget %2$s">',
+		'after_widget'  => "</div>\n",
+		'before_title'  => '<h2 class="widgettitle">',
+		'after_title'   => "</h2>\n"
+	) );
 }
