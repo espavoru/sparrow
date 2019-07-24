@@ -160,7 +160,7 @@ img { border-radius: 3px; }
    /*position: relative; */
    margin: 24px 0 36px 0;
 }
-#sidebar .widget .text-search {
+#sidebar .widget [type="text"] {
 	padding-right: 40px;
 	border:none;
    width: 100%;
@@ -168,7 +168,7 @@ img { border-radius: 3px; }
 
    border-radius: 3px;
 }
-#sidebar .widget .submit-search {
+#sidebar .widget [type="submit"] {
 	background:url(../images/search-icon.png) no-repeat;
 	border:none;
 	cursor:pointer;
@@ -182,7 +182,10 @@ img { border-radius: 3px; }
    top: -60px;
    right: 18px;
    /*display: none !important;*/
+   font-size: 0;
 }
+
+#sidebar .screen-reader-text {display: none;}
 
 #primary { }
 
@@ -202,6 +205,12 @@ header .logo {
    left: 20px;
    top: 48px;
 }
+
+.text-logo {
+   font-size: 32px;
+   line-height: 18px;
+}
+
 header .logo a {
    display: block;
    margin: 0;

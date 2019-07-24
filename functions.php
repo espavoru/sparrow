@@ -29,6 +29,9 @@ function header_scripts() {
 function theme_register_nav_menu() {
 	register_nav_menu( 'top', 'Header menu' );
 	register_nav_menu( 'bottom', 'Footer menu' );
+	add_theme_support( 'title-tag' );
+	add_theme_support( 'post-thumbnails', array( 'post' ) );          // Только для post
+	add_image_size( 'post-thumb', 1300, 500, true );
 }
 
 function register_my_widgets(){
