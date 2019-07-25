@@ -1,10 +1,17 @@
 <?php
 
-add_action('wp_enqueue_scripts', 'style_theme');
-add_action('wp_enqueue_scripts', 'header_scripts');
+add_action('wp_enqueue_scripts', 'style_theme', 3);
+add_action('wp_enqueue_scripts', 'header_scripts', 5);
 add_action('wp_footer', 'scripts_theme');
 add_action('after_setup_theme', 'theme_register_nav_menu');
 add_action('widgets_init', 'register_my_widgets');
+
+add_filter( 'document_title_separator', 'my_separ' );
+function my_separ( $sep ){
+	$sep = " | ";
+	return $sep;
+}
+add_filter('the_content', 'test_content');
 
 function style_theme() {
     wp_enqueue_style('style', get_stylesheet_uri());
@@ -55,3 +62,25 @@ function register_my_widgets(){
 		'after_title'   => "</h2>\n"
 	) );
 }
+
+function test_content($content) {
+	$content.= "Hello world!";
+	return $content;
+}
+
+add_shortcode('my_short', 'short_function');
+function short_function() {
+	return '<h2>Im HERE</h2>';
+}
+
+function Generate_iframe( $atts ) {
+	$atts = shortcode_atts( array(
+		'href'   => 'https://wp-kama.ru/function/add_shortcode',
+		'height' => '550px',
+		'width'  => '600px',     
+	), $atts );
+
+	return '<iframe src="'. $atts['href'] .'" width="'. $atts['width'] .'" height="'. $atts['height'] .'"> <p>Your Browser does not support Iframes.</p></iframe>';
+}
+add_shortcode('iframe', 'Generate_iframe');
+// использование: [iframe href="http://www.exmaple.com" height="480" width="640"]
